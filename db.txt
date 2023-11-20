@@ -1,0 +1,57 @@
+-- Create table Patients
+CREATE TABLE Patients (
+    Patient_ID SERIAL PRIMARY KEY,
+    First_Name VARCHAR(255),
+    Last_Name VARCHAR(255),
+    Date_of_Birth DATE,
+    Gender VARCHAR(10),
+    Contact_Information VARCHAR(255)
+);
+
+-- Create table Medical_Staff
+CREATE TABLE Medical_Staff (
+    Staff_ID SERIAL PRIMARY KEY,
+    First_Name VARCHAR(255),
+    Last_Name VARCHAR(255),
+    Position VARCHAR(255),
+    Contact_Information VARCHAR(255)
+);
+
+-- Create table Medical_Equipment
+CREATE TABLE Medical_Equipment (
+    Equipment_ID SERIAL PRIMARY KEY,
+    Name VARCHAR(255),
+    Manufacturer VARCHAR(255),
+    Acquisition_Date DATE,
+    Inventory_Number VARCHAR(50)
+);
+
+-- Create table Equipment_Types
+CREATE TABLE Equipment_Types (
+    Type_ID SERIAL PRIMARY KEY,
+    Equipment_Type_Name VARCHAR(255)
+);
+
+-- Create table Appointments
+CREATE TABLE Appointments (
+    Appointment_ID SERIAL PRIMARY KEY,
+    Date_and_Time TIMESTAMP,
+    Patient_ID INTEGER REFERENCES Patients(Patient_ID),
+    Staff_ID INTEGER REFERENCES Medical_Staff(Staff_ID),
+    Diagnosis VARCHAR(255),
+    Appointment_Description TEXT
+);
+
+-- Create table Suppliers
+CREATE TABLE Suppliers (
+    Supplier_ID SERIAL PRIMARY KEY,
+    Name VARCHAR(255),
+    Contact_Information VARCHAR(255)
+);
+
+-- Create table Medical_Equipment_Types (junction table for many-to-many relationship)
+CREATE TABLE Medical_Equipment_Types (
+    Equipment_ID INTEGER REFERENCES Medical_Equipment(Equipment_ID),
+    Type_ID INTEGER REFERENCES Equipment_Types(Type_ID),
+    PRIMARY KEY (Equipment_ID, Type_ID)
+);

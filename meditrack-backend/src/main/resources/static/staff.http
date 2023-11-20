@@ -1,0 +1,19 @@
+###
+GET http://localhost:8080/profile/staff
+
+###
+GET http://localhost:8080/staff
+
+###
+POST http://localhost:8080/staff
+Content-Type: application/json
+
+{
+  "firstname": "lol",
+  "lastname": "lol",
+  "position": "lol",
+  "contacts": "lol"
+}
+
+###
+GET http://localhost:8080/appointments/4/staff
