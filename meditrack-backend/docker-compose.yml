@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  backend:
+    container_name: medi-track-backend
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/medi_track
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - db
+  db:
+    extends:
+      file: ../medi-track-pg-dc.yml
+      service: pg
