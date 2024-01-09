@@ -1,0 +1,18 @@
+version: "3"
+services:
+  back:
+    extends:
+      file: ./meditrack-backend/docker-compose.yml
+      service: backend
+    depends_on:
+      - db  
+  front:
+    extends: 
+      file: ./meditrack-frontend/docker-compose.yml
+      service: frontend
+    depends_on:
+      - back
+  db:
+    extends:
+      file: ./medi-track-pg-dc.yml
+      service: pg
